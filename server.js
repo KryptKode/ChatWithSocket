@@ -4,6 +4,9 @@ const app = express();
 
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const mongoose = require("mongoose");
+
+var dbUrl = "mongodb://username:username1@ds161104.mlab.com:61104/chat"
 
 
 app.use(express.static(__dirname));
@@ -28,6 +31,10 @@ app.post("/messages", (req, res) =>{
 
 io.on("connection", (socket)=>{
     console.log("A user connected");
+})
+
+mongoose.connect(dbUrl,{ useNewUrlParser: true }, (err) =>{
+    console.log("Mongoose connected", err);
 })
 
 var server = http.listen(3000, ()=>{
