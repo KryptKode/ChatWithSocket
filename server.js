@@ -22,6 +22,7 @@ app.get("/messages", (req, res) =>{
 
 app.post("/messages", (req, res) =>{
     messages.push(req.body);
+    io.emit("message", req.body);
     res.sendStatus(200);
 });
 
